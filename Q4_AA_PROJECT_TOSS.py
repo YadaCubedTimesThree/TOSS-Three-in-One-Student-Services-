@@ -342,6 +342,7 @@ class RequirementsTracker():
         
 # Sorry, this doesn't get a class it's just one function lol
 def courseBrochure():
+    
     #Course Window Creation
     courseWindow = Toplevel()
     
@@ -516,7 +517,7 @@ PAGILAGAN, CCI
 YUSON, YANNA
 """)
     
-
+    # Split every line of text into actual lines of text for the scroll box
     for line in readMeText.split("\n"):
         
         readMe.insert(END, line)
@@ -526,12 +527,13 @@ YUSON, YANNA
     
 def gradeCalculator():
     
-    # Just calling the class
+    # Just calling the class, as it's unaccessable via just command
     openGradeCalc = GradeCalculator(window)
     openGradeCalc.gradeCalc()
     
 def requirementsTracker():
     
+    # Same as gradeCalculator()
     openReqsTracker = RequirementsTracker()
     openReqsTracker.reqsTracker()
     
