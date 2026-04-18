@@ -11,33 +11,28 @@ A year-long Computer Science project designed to help PISAY students manage thei
 
 ## Installation
 
-1. Download or copy the following files:
+1. Download:
 
-   * `Q4_AA_PROJECT_TOSS.py`
-   * `logo.png`
+   * Q4_AA_PROJECT_TOSS.py
+   * logo.png
+   * 
+NOTE: ENSURE BOTH ARE IN THE SAME FOLDER
 
-2. Make sure both files are in the same folder.
-
-3. Run the program using your preferred IDE or with:
-
-   ```bash
-   python Q4_AA_PROJECT_TOSS.py
-   ```
+2. Run the program using your preferred IDE
 
 ## Requirements
 
 * Python 3.x
 * Required libraries:
 
-  * `tkinter` (usually pre-installed)
-  * `tkcalendar`
-  * `datetime`
+    * tkinter
+    * tkcalendar
+    * datetime
 
-You can install missing libraries using:
-
-```bash
-pip install tkcalendar
-```
+You can install missing libraries using the following in the Command Prompt:
+```pip install tkcalendar```
+```pip install datetime```
+```pip install tkinter```
 
 ## Usage
 
@@ -49,28 +44,28 @@ pip install tkcalendar
 
 ### Requirements Tracker
 
-* Add academic requirements
-* The app automatically ranks the top 3 priorities
+* Input your requirements
+* The app automatically ranks the top three most important assignments
 * Note: Removing completed tasks and viewing the full list are planned features (prototype stage)
 
 ### Course Brochure
 
 * View-only section
-* Scrollable content for easy reading
+* You may scroll through the list
 
 ### README (In-App)
 
-* Read-only reference inside the program
+* Same as this, but in the app itself
 
 ## Notes
 
-* This project is currently a prototype
-* Additional features and improvements are planned
+* This project is currently a prototype, no features are final
 
 ## Authors
 
-Developed as part of a Computer Science project.
-
-## License
-
-This project is for educational purposes.
+Developed for the school-year wide CS AA, by:
+AVILLA, SAUL
+CASTILLO, KHIANE
+MANALO, ZETH
+PAGILAGAN, CCI
+YUSON, YANNA
