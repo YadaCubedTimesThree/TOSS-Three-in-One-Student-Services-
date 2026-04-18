@@ -18,7 +18,7 @@ class GradeCalculator():
         
         self.gradeWindow.geometry('500x500')
         self.gradeWindow.title("Grade Calculator")
-        self.gradeWindow.config(background="#B3FFF8")
+        self.gradeWindow.config(background="#FFFFCC")
 
         self.gradeWindow.icon = PhotoImage(file='waling.png')
         
@@ -222,88 +222,245 @@ class GradeCalculator():
     
 class RequirementsTracker():
     
+    
+    ### INIT
     def __init__(self):
         
-        pass
+        self.placeholder = IntVar()
+        self.reqsWindow = Toplevel()
         
-    def receiveData():
+        # Defining the list
+        self.assignmentsList = [ ]
+        self.subjectsList = [ ]
         
+        titleLabel = Label(self.reqsWindow, text = "Assignment Rankings:", font=('Arial',25), relief=RAISED, bd=10)
+        titleLabel.place(x=20,y=170)
+        
+        self.placeholderText = Label(self.reqsWindow, text="MOST IMPORTANT ASSIGNMENT", font=('Arial',16), relief=RAISED, bd=5, fg = 'orange')
+        self.placeholderText.place(x=20, y=250 * 1)
+            
+        self.placeholder2 = Label(self.reqsWindow, text="2ND MOST IMPORTANT ASSIGNMENT", font=('Arial',16), relief=RAISED, bd=5, fg = 'red')
+        self.placeholder2.place(x=20, y=200 + 50 * 2)
+            
+        self.placeholder3 = Label(self.reqsWindow, text="3RD MOST IMPORTANT ASSIGNMENT", font=('Arial',16), relief=RAISED, bd=5, fg = '#dd0000')
+        self.placeholder3.place(x=20, y=200 + 50 * 3)
+        
+        self.placeholderTexts = [self.placeholderText, self.placeholder2, self.placeholder3]
+        
+    def receiveData(self):
+        
+        from datetime import date
+        
+        # Checks if the input is empty or not, ends the function if it is empty
+        if (not self.assignmentDesc.get().strip()):
+            
+            self.enter.config(fg='red')
+            
+            return None
+        
+        # Reset the enter button
+        self.enter.config(fg='black')
+        
+        # Get the values from the inputs
         assignmentType = self.placeholder.get()
-        assignmentDue = self.dates.get()
+        assignmentDue = self.dates.get_date()
         subjectAssignment = self.subject.get()
+        detailsAssignment = self.assignmentDesc.get()
         
+        # Convert into days left
+        dueDate = (assignmentDue - date.today()).days
+        
+        # How important the assignemnt is
+        assignmentValue = dueDate - assignmentType
+        
+        # Append the assignment
+        self.assignmentsList.append((assignmentValue, subjectAssignment, detailsAssignment, assignmentType, assignmentDue))
+        
+        # Sorting the list itself
+        self.assignmentsList.sort()
+        
+        # Placing the assignments
+        print(self.assignmentsList)
+        
+        
+        ##### FIX. THE. LOGIC. HERE.
+        # Somehow link the subjects list to the assignments list
+        
+        counter = 0
+        for value, subject, assignment, typeOfAssignment, date in self.assignmentsList:
+            
+            self.placeholderTexts[counter].config(text=f"{subject}, {assignment}, {self.possibleTypes[typeOfAssignment]}, {date}")
+            counter += 1
+            
+            if counter == 3:
+                break
+            
+            
+        
+            
+        
+    
     def reqsTracker(self):
+           
+        # Creation of the window
         
-        
-        
+        # Need this for the date calculating stuff
         from tkcalendar import DateEntry
         
-        reqsWindow = Toplevel()
+        self.reqsWindow.geometry('500x500')
+        self.reqsWindow.title('Requirements Tracker')
+        self.reqsWindow.config(background="#B3FFAA")
         
-        reqsWindow.geometry('500x500')
-        reqsWindow.title('Requirements Tracker')
-        reqsWindow.config(background="#B3FFF8")
-        
-        reqsWindow.icon = PhotoImage(file="waling.png")
+        self.reqsWindow.icon = PhotoImage(file="waling.png")
         
         # Date entering
-        self.dates = DateEntry(reqsWindow, date_pattern='yyyy-mm-dd')
+        self.dates = DateEntry(self.reqsWindow, date_pattern='yyyy-mm-dd')
         self.dates.config(font=('Arial',20))
         self.dates.place(x=280, y=10)
         
+        #Assignment Entering
+        self.assignmentDesc = Entry(self.reqsWindow)
+        self.assignmentDesc.config(font=('Arial', 20), relief=RAISED, bd=5, width = 10)
+        self.assignmentDesc.place(x=280, y= 50)
+        
+        placeholderLabel = Label(self.reqsWindow, text="Reqs Description:")
+        placeholderLabel.config(font=('Arial', 8), relief=RAISED, bd=5)
+        placeholderLabel.place(x=280,y=90)
+        
         #Subject Entering
-        self.subject = Entry(reqsWindow)
+        self.subject = Entry(self.reqsWindow)
         self.subject.config(font=('Arial', 20), relief=RAISED, bd=5, width = 10)
         self.subject.place(x=10, y=10)
         
+        #Default input
+        self.subject.insert(0,'ADTech')
+        
         
         #Type Entering
-        possibleTypes = ['FA','AA/SA','LT']
+        self.possibleTypes = ['FA','AA/SA','LT']
         
         # Creation of the selection menu 
-        for i in range(len(possibleTypes)):
-            selectType = Radiobutton(reqsWindow,text=possibleTypes[i], variable=self.placeholder, value=i, relief=RAISED, bd = 5)
+        for i in range(len(self.possibleTypes)):
+            selectType = Radiobutton(self.reqsWindow,text=self.possibleTypes[i], variable=self.placeholder, value=i, relief=RAISED, bd = 5)
             selectType.place(x=200,y=10+(i*25))
         
         #Enter
-            
-        enter = Button(reqsWindow, text="Enter All", command=receiveData)
-        enter.place(x=10, y= 50)
+        
+        self.enter = Button(self.reqsWindow, text="Enter All", command=self.receiveData)
+        self.enter.place(x=10, y= 50)
         
     
         
         
-    
+# Sorry, this doesn't get a class it's just one function lol
 def courseBrochure():
-    from PIL import Image, ImageTk # For image creation
-    
     #Course Window Creation
     courseWindow = Toplevel()
     
-    courseWindow.geometry('1000x900')
+    courseWindow.geometry('650x500')
     courseWindow.title("Course Brochure")
-    courseWindow.config(background="#B3FFF8")
+    courseWindow.config(background="#FFCCAA")
 
     courseWindow.icon = PhotoImage(file='waling.png')
     
-    curriculum = Image.open("courseDescriptions.png")
-    curriculum = curriculum.resize((800,300))
+    ### LIST OF ALL THE COURSES
+    courses = [
+    ("ADTech 1", "Art, Design and Technology: Basic Principles and Processes"),
+    ("ADTech 2", "Art, Design and Technology: Resistant Materials and Electronics"),
+    ("ADTech 3", "Art, Design and Technology: Exploring Technologies"),
+
+    ("Biology 1", "Fundamentals of Biology 1"),
+    ("Biology 2", "Fundamentals of Biology 2"),
+    ("Biology 3", "Foundations of Molecular and Cellular Biology"),
+    ("Biology 4", "Contemporary Biology"),
+    ("Biology 5", "Biology for a Changing World"),
+
+    ("Chemistry 1", "General Chemistry 1"),
+    ("Chemistry 2", "General Chemistry 2"),
+    ("Chemistry 3", "General Chemistry 3"),
+    ("Chemistry 4", "Fundamentals of Organic and Biological Chemistry"),
+    ("Chemistry 5", "Applied Chemistry"),
+
+    ("Computer Science 1", "Introduction to Computing"),
+    ("Computer Science 2", "Coding in a Connected World: Development of Computational Thinking Skills"),
+    ("Computer Science 3", "Object-Oriented Programming 1"),
+    ("Computer Science 4", "Object-Oriented Programming 2"),
+
+    ("Earth Science 1", "Earth Systems, Energy, and Change"),
+
+    ("English 1", "Communications Arts 1"),
+    ("English 2", "Communications Arts 2"),
+    ("English 3", "Communications Arts 3"),
+    ("English 4", "Communications Arts 4"),
+    ("English 5", "English for Academic and Professional Purposes: Oral and Written Communication"),
+    ("English 6", "Science Communication"),
+
+    ("Filipino 1", "Wika at ang Panitikang Pilipino"),
+    ("Filipino 2", "Komunikasyon at ang Panitikang Pilipino"),
+    ("Filipino 3", "Retorika, Pagsusuri at ang Noli Me Tangere"),
+    ("Filipino 4", "Akademikong Pagsulat at ang El Filibusterismo"),
+    ("Filipino 5", "Komunikasyong Makabagong Tungo sa Maka-Pilipinong Pananaliksik"),
+    ("Filipino 6", "Maka-Pilipinong Pananaliksik sa Wika, Kultura, Agham at Teknolohiya"),
+
+    ("Health 1", "Growth and Development, Mental and Emotional Health"),
+    ("Health 2", "Family Health and Preventive Drug Education"),
+    ("Health 3", "Safety Education, First Aid and Disease Prevention"),
+    ("Health 4", "Consumer Health, Community and Environmental Health"),
+
+    ("Mathematics 1", "Algebra 1"),
+    ("Mathematics 2", "Algebra 2"),
+    ("Mathematics 3", "Geometry"),
+    ("Mathematics 4", "Algebra 3"),
+    ("Mathematics 5", "Algebra 4"),
+    ("Mathematics 6", "Differential Calculus"),
+    ("Mathematics 7", "Integral Calculus"),
+    ("Mathematics 8", "Linear Algebra"),
+
+    ("Physics 1", "Introduction to Physics"),
+    ("Physics 2", "Fundamentals of Physics 1"),
+    ("Physics 3", "Fundamentals of Physics 2"),
+    ("Physics 4", "Fundamentals of Physics 3"),
+    ("Physics 5", "Calculus-Based and Computational Physics"),
+
+    ("Research 1", "Research and Development 1: Proposal Writing and Implementation"),
+    ("Research 2", "Research and Development 2: Validation, Synthesis, and Communication"),
+
+    ("Statistics 1", "Data and Probability 1"),
+    ("Statistics 2", "Data and Probability 2"),
+
+    ("Social Science 1", "Philippine History"),
+    ("Social Science 2", "World History"),
+    ("Social Science 3", "Citizenship and Civic Education"),
+    ("Social Science 4", "Governance and Sustainable Futures"),
+    ("Social Science 5", "Basic Principles of Economics"),
+    ("Social Science 6", "Community Development and Engagement"),
+
+    ("Values Education 1", "Adolescent Living and Character Building"),
+    ("Values Education 2", "Toward Adolescent Wholeness"),
+    ("Values Education 3", "Values and Standards for a Meaningful Life"),
+    ("Values Education 4", "The Thinking Person's Being and Becoming"),
     
-    curriculum2 = Image.open("courseDescriptions2.png")
-    curriculum2 = curriculum2.resize((800,450))
+]
+    ### LIST END
     
-    courseBrochure = ImageTk.PhotoImage(curriculum)
-    courseBrochure2 = ImageTk.PhotoImage(curriculum2)
+    # Placing the text
     
-    # Placing the image itself
-    curriculum = Label(courseWindow, image=courseBrochure, relief=RAISED, bd = 5)
-    curriculum.image = courseBrochure
-    curriculum.pack()
+    courseList = Listbox(courseWindow, width=80, height=30)
     
-    curriculum2 = Label(courseWindow, image=courseBrochure2, relief=RAISED, bd = 5)
-    curriculum2.image = courseBrochure2
-    curriculum2.pack()
-  
+    for course, description in courses:
+        
+        courseList.insert(END, f"{course}, {description}")
+        
+    courseList.config(font=('Arial', 8), relief=RAISED, bd=10)
+    courseList.place(x=10,y=10)
+    
+    header = Label(courseWindow, text="\n".join(" COURSE-BROCHURE "),font=('Arial', 15),justify='center', relief=RAISED, bd=15)
+    header.place(x=580, y=20)
+    
+    header = Label(courseWindow, text="\n".join("SCROLL-DOWN-FOR-MORE"),font=('Arial', 10),justify='center', relief=RAISED, bd=15)
+    header.place(x=520, y=50)
+    
+    
     
     
 
@@ -384,4 +541,5 @@ button.config(command=readMe)
 button.config(font = ('Arial', 15), relief=RAISED, bd = 10, activebackground='grey')
 
 window.mainloop()
+
 
