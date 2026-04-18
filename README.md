@@ -60,6 +60,7 @@ You can install missing libraries using the following in the Command Prompt:
 ## Notes
 
 * This project is currently a prototype, no features are final
+* There is a text-only prototype available, "Q3_AA_PROJECT_TOSS_GUI_NEEDED"
 
 ## Authors
 
