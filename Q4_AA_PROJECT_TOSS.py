@@ -3,6 +3,8 @@
 # START OF CLASS GRADE CALCULATOR
 class GradeCalculator():
     
+    ### Calculate the grade, and then output a GWA, and also check if the person is failing or passing
+    
     def __init__(self, master):
         self.counter = 0
         self.error = 0
@@ -17,10 +19,10 @@ class GradeCalculator():
         self.gradeWindow = Toplevel(self.master)
         
         self.gradeWindow.geometry('500x500')
-        self.gradeWindow.title("Grade Calculator")
+        self.gradeWindow.title("TOSS - Grade Calculator")
         self.gradeWindow.config(background="#FFFFCC")
 
-        self.gradeWindow.icon = PhotoImage(file='waling.png')
+        self.gradeWindow.icon = PhotoImage(file='logo.png')
         
         enterSubject = Label(self.gradeWindow, text="--Amount of Subjects")
         enterSubject.config(font=('Arial', 20), relief=RAISED, bd=20, padx=10, pady=10)
@@ -106,14 +108,6 @@ class GradeCalculator():
                     self.creditsTotal += creditOfSubject
                     self.counter += 1
                     
-                    # Just for checking if the code works
-                    print(gradeOfStudent)
-                    print(creditOfSubject)
-                    print(self.counter)
-                    print(self.grades)
-                    print(self.creditsTotal)
-                    # Delete these later
-                    
                     # Delete error message, if possible
                     if self.error == 1:
                         self.errorMessage.destroy()
@@ -139,7 +133,6 @@ class GradeCalculator():
             except ValueError:
                 # Call error code
                 self.showError()
-
 
     def showError(self):
         
@@ -222,6 +215,7 @@ class GradeCalculator():
     
 class RequirementsTracker():
     
+    ### Rank requirements by priority levels
     
     ### INIT
     def __init__(self):
@@ -273,18 +267,12 @@ class RequirementsTracker():
         # How important the assignemnt is
         assignmentValue = dueDate - assignmentType
         
-        # Append the assignment
+        # Append all needed data for the for loop
         self.assignmentsList.append((assignmentValue, subjectAssignment, detailsAssignment, assignmentType, assignmentDue))
-        
-        # Sorting the list itself
+
         self.assignmentsList.sort()
         
-        # Placing the assignments
         print(self.assignmentsList)
-        
-        
-        ##### FIX. THE. LOGIC. HERE.
-        # Somehow link the subjects list to the assignments list
         
         counter = 0
         for value, subject, assignment, typeOfAssignment, date in self.assignmentsList:
@@ -295,6 +283,11 @@ class RequirementsTracker():
             if counter == 3:
                 break
             
+            
+        
+            
+        
+    
     def reqsTracker(self):
            
         # Creation of the window
@@ -303,10 +296,10 @@ class RequirementsTracker():
         from tkcalendar import DateEntry
         
         self.reqsWindow.geometry('500x500')
-        self.reqsWindow.title('Requirements Tracker')
+        self.reqsWindow.title('TOSS - Requirements Tracker')
         self.reqsWindow.config(background="#B3FFAA")
         
-        self.reqsWindow.icon = PhotoImage(file="waling.png")
+        self.reqsWindow.icon = PhotoImage(file="logo.png")
         
         # Date entering
         self.dates = DateEntry(self.reqsWindow, date_pattern='yyyy-mm-dd')
@@ -344,8 +337,8 @@ class RequirementsTracker():
         self.enter = Button(self.reqsWindow, text="Enter All", command=self.receiveData)
         self.enter.place(x=10, y= 50)
         
-# END OF CLASS REQS TRACKER
-    
+# END OF CLASS REQS CALCULATOR
+        
         
 # Sorry, this doesn't get a class it's just one function lol
 def courseBrochure():
@@ -353,10 +346,10 @@ def courseBrochure():
     courseWindow = Toplevel()
     
     courseWindow.geometry('650x500')
-    courseWindow.title("Course Brochure")
+    courseWindow.title("TOSS - Course Brochure")
     courseWindow.config(background="#FFCCAA")
 
-    courseWindow.icon = PhotoImage(file='waling.png')
+    courseWindow.icon = PhotoImage(file='logo.png')
     
     ### LIST OF ALL THE COURSES
     courses = [
@@ -457,7 +450,7 @@ def courseBrochure():
     
     
     
-# This doesn't get a class either, it's just the README file
+    
 
 def readMe():
     
@@ -466,21 +459,70 @@ def readMe():
     readMeWindow = Toplevel()
     
     readMeWindow.geometry('500x500')
-    readMeWindow.title("README")
+    readMeWindow.title("TOSS - README")
     readMeWindow.config(background="#B3FFF8")
 
-    readMeWindow.icon = PhotoImage(file='waling.png')
+    readMeWindow.icon = PhotoImage(file='logo.png')
     
     
     #PLACEHOLDER text for the README file
-    readMeFile = Label(readMeWindow, text="""This
-text will serve as a placeholder
-for the upcoming readme file.
+    readMe = Listbox(readMeWindow, width=100, height=50,font=('Arial', 7), relief=RAISED, bd=10)
+    readMeText=("""# TOSS – Three-in-One Student Services #
 
-Made with love, yadayadayada""")
+ - A year-long Computer Science project designed to help PISAY students manage their academic life more efficiently.
+
+***Features***
+
+* Clean and simple interface
+* Easy to use
+* Fast and efficient
+* Lightweight and compact
+
+***USAGE***
+
+### Grade Calculator
+
+* Input your subjects, grades, and corresponding credits
+* The program calculates your GWA automatically
+* Exit after viewing results
+
+### Requirements Tracker
+
+* Input your requirements
+* The app automatically ranks the top three most important assignments
+* Note: Removing completed tasks and viewing the full list are planned features (prototype stage)
+
+### Course Brochure
+
+* View-only section
+* You may scroll through the list
+
+### README (In-App)
+
+* Same as this, but in the app itself
+
+## Notes
+
+* This project is currently a prototype, no features are final
+* There is a text-only prototype available, "Q3_AA_PROJECT_TOSS_GUI_NEEDED"
+
+## Authors
+
+Developed for the school-year wide CS AA, by:
+AVILLA, SAUL
+CASTILLO, KHIANE
+MANALO, ZETH
+PAGILAGAN, CCI
+YUSON, YANNA
+""")
     
-    readMeFile.configure(font=('Arial', 8), relief=RAISED, bd = 6, fg = 'orange')
-    readMeFile.place(x = 20,y = 20)
+
+    for line in readMeText.split("\n"):
+        
+        readMe.insert(END, line)
+
+    readMe.pack()
+    
     
 def gradeCalculator():
     
@@ -500,40 +542,39 @@ from tkinter import *
 # Window Creation
 window = Tk()
 
-window.geometry('700x500')
+window.geometry('500x500')
 window.title("Three-in-One-Student-Services")
 window.config(background="#B3FFF8")
 
-icon = PhotoImage(file='waling.png')
+icon = PhotoImage(file='logo.png')
 window.iconphoto(True,icon)
 
 # Text
 label = Label(window,text="Welcome to TOSS!", font=('Arial', 30,'bold'),bg='white', relief=RAISED, bd = 10, padx = 5, pady = 5)
-label.place(x=175,y=100)
+label.place(x=20,y=50)
 
 # Menu Selection Buttons
-
 #GRADE CALCULATOR
 button = Button(window, text = 'Grade Calculator')
-button.place(x=175, y = 200)
+button.place(x=20, y = 200)
 button.config(command=gradeCalculator)
 button.config(font = ('Arial', 15), relief=RAISED, bd = 10, activebackground='grey')
 
 #REQS TRACKER
 button = Button(window, text = 'Requirements Tracker')
-button.place(x=175, y = 275)
+button.place(x=20, y = 275)
 button.config(command=requirementsTracker)
 button.config(font = ('Arial', 15), relief=RAISED, bd = 10, activebackground='grey')
 
 #COURSE BROCHURE
 button = Button(window, text = 'Course Brochure')
-button.place(x=175, y = 350)
+button.place(x=20, y = 350)
 button.config(command=courseBrochure)
 button.config(font = ('Arial', 15), relief=RAISED, bd = 10, activebackground='grey')
 
-#README FILE
+#README
 button = Button(window, text = 'Read Me')
-button.place(x=175, y = 420)
+button.place(x=20, y = 420)
 button.config(command=readMe)
 button.config(font = ('Arial', 15), relief=RAISED, bd = 10, activebackground='grey')
 
