@@ -51,7 +51,7 @@ pip install tkcalendar
 
 * Add academic requirements
 * The app automatically ranks the top 3 priorities
-* ⚠️ Note: Removing completed tasks and viewing the full list are planned features (prototype stage)
+* Note: Removing completed tasks and viewing the full list are planned features (prototype stage)
 
 ### Course Brochure
 
