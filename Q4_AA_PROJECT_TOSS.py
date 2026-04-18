@@ -295,11 +295,6 @@ class RequirementsTracker():
             if counter == 3:
                 break
             
-            
-        
-            
-        
-    
     def reqsTracker(self):
            
         # Creation of the window
@@ -349,8 +344,8 @@ class RequirementsTracker():
         self.enter = Button(self.reqsWindow, text="Enter All", command=self.receiveData)
         self.enter.place(x=10, y= 50)
         
+# END OF CLASS REQS TRACKER
     
-        
         
 # Sorry, this doesn't get a class it's just one function lol
 def courseBrochure():
@@ -462,7 +457,7 @@ def courseBrochure():
     
     
     
-    
+# This doesn't get a class either, it's just the README file
 
 def readMe():
     
@@ -517,6 +512,7 @@ label = Label(window,text="Welcome to TOSS!", font=('Arial', 30,'bold'),bg='whit
 label.place(x=175,y=100)
 
 # Menu Selection Buttons
+
 #GRADE CALCULATOR
 button = Button(window, text = 'Grade Calculator')
 button.place(x=175, y = 200)
@@ -535,6 +531,7 @@ button.place(x=175, y = 350)
 button.config(command=courseBrochure)
 button.config(font = ('Arial', 15), relief=RAISED, bd = 10, activebackground='grey')
 
+#README FILE
 button = Button(window, text = 'Read Me')
 button.place(x=175, y = 420)
 button.config(command=readMe)
