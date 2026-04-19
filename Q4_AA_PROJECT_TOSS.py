@@ -509,7 +509,7 @@ def readMe():
 
 ## Authors
 
-Developed for the school-year wide CS AA, by:
+Developed for the school-year wide CS 2 AA, by:
 AVILLA, SAUL
 CASTILLO, KHIANE
 MANALO, ZETH
@@ -583,3 +583,4 @@ button.config(font = ('Arial', 15), relief=RAISED, bd = 10, activebackground='gr
 window.mainloop()
 
 
+    
