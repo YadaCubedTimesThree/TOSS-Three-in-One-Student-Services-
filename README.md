@@ -1,6 +1,6 @@
 # TOSS – Three-in-One Student Services
 
-A year-long Computer Science project designed to help PISAY students manage their academic life more efficiently.
+A year-long Computer Science 2 project designed to help PISAY students manage their academic life more efficiently.
 
 ## Features
 
@@ -64,7 +64,7 @@ You can install missing libraries using the following in the Command Prompt:
 
 ## Authors
 
-Developed for the school-year wide CS AA, by:
+Developed for the school-year wide CS 2 AA, by:
 AVILLA, SAUL
 CASTILLO, KHIANE
 MANALO, ZETH
